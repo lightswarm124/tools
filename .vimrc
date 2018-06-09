@@ -17,6 +17,7 @@ Plugin 'mxw/vim-jsx'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'w0rp/ale'
 Plugin 'tomlion/vim-solidity'
+Plugin 'mattn/emmet-vim'
 
 "All of your Plugins must be added before the following line
 call vundle#end()            	"required
@@ -85,6 +86,11 @@ set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ 
 set cmdheight=1                 " use a status bar that is 2 rows high
 set ruler			            " Always show current position
 set hid				            " Hid buffer when abandoned
+
+nnoremap <Tab><Left> 2<C-w><S-<>
+nnoremap <Tab><Right> 2<C-w><S->>
+nnoremap <Tab><Up> 2<C-w><S-+>
+nnoremap <Tab><Down> 2<C-w><S-->
 "EDITOR LAYOUT }}}
 
 "VIM BEHAVIOR {{{
@@ -95,7 +101,7 @@ set undolevels=1000             " set levels of undo
 set nobackup                    " do not keep backup files, it's 70's style cluttering
 set nowb			            "do not keep backup files
 set noswapfile                  " do not write annoying intermediate swap files
-set viminfo='20,\"80            " read/write a .viminfo file, don't store more than 80
+set viminfo='20,\"500           " read/write a .viminfo file, don't store more than 500
 set cursorline			        " underline the current line, for quick orientation
 set background=dark		        "change background colour
 
@@ -120,9 +126,16 @@ nmap <Leader>d <Plug>(ale_fixers)
 let g:ale_fix_on_save=1         
 let g:ale_completion_enabled = 1
 
-
 let g:javascript_plugin_flow = 1
 let g:jsx_ext_required = 0
+
+let g:user_emmet_leader_key='<Tab>'
+let g:user_emmet_settings = {
+\  'javascript' : {
+\      'extends' : 'jsx',
+\  },
+\}
+autocmd FileType html,css,javascript.jsx EmmetInstall
 "SYNTAX MODIFICATION }}}
 
 "NERDTree {{{
