@@ -1,16 +1,15 @@
-set nocompatible              	"be iMproved, required
-filetype off                  	"required
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
-"set the runtime path to include Vundle and initialize
+" set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-"alternatively, pass a path where Vundle should install plugins
+" alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
-"let Vundle manage Vundle, required
+" let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-"Insert subsequent plugins
 Plugin 'scrooloose/nerdtree'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
@@ -19,22 +18,22 @@ Plugin 'w0rp/ale'
 Plugin 'tomlion/vim-solidity'
 Plugin 'mattn/emmet-vim'
 
-"All of your Plugins must be added before the following line
-call vundle#end()            	"required
-filetype plugin on		        "required
-"To ignore plugin indent changes, instead use:
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
 "filetype plugin on
 
 let mapleader=" "
 let maplocalleader="//"
 
-syntax enable			        "syntax highlighting
+syntax enable			"syntax highlighting
 syntax on
 
-set shell=bash			        "set shell environment to bash
+set shell=bash			"set shell environment to bash
 
 "EDITING BEHAVIOR {{{
-set showmode			        "always show what mode we're currently editing in
+set showmode			"always show what mode we're currently editing in
 set wrap                        "don't wrap lines
 set tabstop=4                   "a tab is four spaces
 set softtabstop=4               "when hitting <BS>, pretend like a tab is removed, even if spaces
@@ -47,15 +46,14 @@ set ignorecase                  "ignore case when searching
 set scrolloff=4                 "keep 4 lines off the edges of the screen when scrolling
 set hlsearch                    "highlight search terms
 set incsearch                   "show search matches as you type
-set gdefault 			        "search/replace 'globally' (on a line) by default
+set gdefault 			"search/replace 'globally' (on a line) by default
 set backspace=eol,start,indent	"proper backspace behavior
-set whichwrap+=<,>,h,l		    "move to next/previous lines
+set whichwrap+=<,>,h,l		"move to next/previous lines
 set backspace=indent,eol,start  "Allow backspace in insert mode
-set lbr				            "set line break at:
-set tw=500			            "    500 characters
+set lbr				"set line break at:
+set tw=500			"500 characters
 set splitbelow                  "Split new screen below current screen
-set splitright                  "Split new screen right of current screen
-"toggle search highlight
+set splitright                  "Split new screen right of current screen toggle search highlight
 nnoremap <F4> :nohlsearch<CR><CR>
 nnoremap <F3> :hlsearch<CR><CR>
 nnoremap <leader><Left> :tabprevious<CR><CR>
@@ -72,7 +70,7 @@ nnoremap <C-d> 5<C-e>
 "EDITOR LAYOUT {{{
 function! HasPaste()
     if &paste
-        return 'PASTE MODE  '
+       return 'PASTE MODE  '
     endif
     return ''
 endfunction
@@ -84,8 +82,8 @@ set laststatus=2                " tell VIM to always put a status line in, even
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 
 set cmdheight=1                 " use a status bar that is 2 rows high
-set ruler			            " Always show current position
-set hid				            " Hid buffer when abandoned
+set ruler                      " Always show current position
+set hid                            " Hid buffer when abandoned
 
 nnoremap <Tab><Left> 2<C-w><S-<>
 nnoremap <Tab><Right> 2<C-w><S->>
@@ -99,21 +97,25 @@ set switchbuf=useopen           " reveal already opened files from quickfix wind
 set history=1000                " remember more commands and search history
 set undolevels=1000             " set levels of undo
 set nobackup                    " do not keep backup files, it's 70's style cluttering
-set nowb			            "do not keep backup files
+set nowb                       "do not keep backup files
 set noswapfile                  " do not write annoying intermediate swap files
 set viminfo='20,\"500           " read/write a .viminfo file, don't store more than 500
-set cursorline			        " underline the current line, for quick orientation
-set background=dark		        "change background colour
+set cursorline                 " underline the current line, for quick orientation
+set background=dark                "change background colour
 
 "bind fast save
-nmap <leader>w :w!<cr>		 
+nmap <leader>w :w!<cr>      
 noremap <Leader><CR> :PluginInstall<CR>
 noremap <Leader><Tab> :so %<CR> 
 "VIM BEHAVIOR }}}
 
+
+
+
+
 "SYNTAX MODIFICATION {{{
 
-"ALE
+""ALE
 let g:ale_linters = {
 \   'javascript': ['eslint']
 \}
@@ -138,7 +140,7 @@ let g:user_emmet_settings = {
 autocmd FileType html,css,javascript.jsx EmmetInstall
 "SYNTAX MODIFICATION }}}
 
-"NERDTree {{{
+""NERDTree {{{
 autocmd VimEnter * NERDTree
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
@@ -163,12 +165,11 @@ noremap <Leader>r :NERDTreeTabsToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 "NERDTree }}}
 
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 "
-"Brief help
-":PluginList       - lists configured plugins
-":PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-":PluginSearch foo - searches for foo; append `!` to refresh local cache
-":PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-"see :h vundle for more details or wiki for FAQ
-"Put your non-Plugin stuff after this line
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
